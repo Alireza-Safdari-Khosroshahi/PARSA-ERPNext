@@ -1,0 +1,35 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2022-04-14 11:54:29.954440",
+  "module": "Parsa Plm",
+  "name": "Sales Invoice-Form",
+  "script": "frappe.ui.form.on('Sales Invoice Item', {\n    item_code: function(frm, cdt, cdn){\n\t\tlet item = locals[cdt][cdn];\n\t\tif (item.item_code){\t\n\t\t\tfrappe.call({\n\t\t\t\tmethod: \"erpnext.custom_script.Pfand.get_data_form_sql\",\n\t\t\t\targs:{item_code: item.item_code}\n\t\t\t}).done((r)=> {\n\t\t\t    if (!r.message){\n\t\t\t        refresh_field(\"items\");\n\t\t\t    }\n\t\t\t    else{\n                    let entry =frm.add_child(\"items\");\n    \t\t\t\tentry.item_code = r.message[0].item_code;\n    \t\t\t\tentry.item_name = r.message[0].item_name;\n    \t\t\t\tentry.description = r.message[0].description;\n    \t\t\t\tentry.rate = r.message[0].standard_rate;\n    \t\t\t\tentry.qty = 1;\n    \t\t\t\tentry.uom = r.message[0].stock_uom;\n                    entry.conversion_factor = 1;\n                    entry.rate = r.message[0].standard_rate;\n    \t\t\t\trefresh_field(\"items\");\n                    // entry.income_account = TODO\n                    // entry.cost_center = TODO\n                    frm.doc.summe_pfand += (entry.qty*entry.rate);\n\t\t\t    }\n\t\t\t})\n\t\t}\n\t},\n\tqty: function(frm, cdt, cdn){\n        let item = locals[cdt][cdn];\n        let tbl = frm.doc.items;\n        let i = item.idx;\n        console.log(i)\n\t\tif (item.item_code){\t\n\t\t\tfrappe.call({\n\t\t\t\tmethod: \"erpnext.custom_script.Pfand.get_data_form_sql\",\n\t\t\t\targs:{item_code: item.item_code}\n\t\t\t}).done((r)=> {\n\t\t\t    if (!r.message){\n\t\t\t        refresh_field(\"items\");\n\t\t\t    }\n\t\t\t    else{\n                    if(tbl[i].item_code == r.message[0].item_code)\n                    {\n                        frm.doc.summe_pfand -= tbl[i].amount;\n                        tbl[i].qty = item.qty;\n                        cur_frm.refresh();\n                        // cur_frm.get_field(\"items\").grid.grid_rows[frm.doc.items.length-1].remove();\n                    }\n                    frm.doc.summe_pfand += (tbl[i].qty*tbl[i].rate);\n                    cur_frm.refresh();\n\t\t\t    }\n\t\t\t})\n\t\t}\n        frm.refresh();\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Delivery Note",
+  "enabled": 1,
+  "modified": "2022-04-14 11:45:58.015634",
+  "module": "Parsa Plm",
+  "name": "Delivery Note-Form",
+  "script": "frappe.ui.form.on('Delivery Note Item', {\n    item_code: function(frm, cdt, cdn){\n\t\tlet item = locals[cdt][cdn];\n\t\tif (item.item_code){\t\n\t\t\tfrappe.call({\n\t\t\t\tmethod: \"erpnext.custom_script.Pfand.get_data_form_sql\",\n\t\t\t\targs:{item_code: item.item_code}\n\t\t\t}).done((r)=> {\n\t\t\t    if (!r.message){\n\t\t\t        refresh_field(\"items\");\n\t\t\t    }\n\t\t\t    else{\n                    let entry =frm.add_child(\"items\");\n    \t\t\t\tentry.item_code = r.message[0].item_code;\n    \t\t\t\tentry.item_name = r.message[0].item_name;\n    \t\t\t\tentry.description = r.message[0].description;\n    \t\t\t\tentry.rate = r.message[0].standard_rate;\n    \t\t\t\tentry.qty = 1;\n    \t\t\t\tentry.uom = r.message[0].stock_uom;\n    \t\t\t\tentry.conversion_factor = 1;\n    \t\t\t\tentry.rate = r.message[0].standard_rate;\n    \t\t\t\trefresh_field(\"items\");\n    \t\t\t\t// entry.income_account = TODO\n    \t\t\t\t// entry.cost_center = TODO\n    \t\t\t\tfrm.doc.summe_pfand += (entry.qty*entry.rate);\n\t\t\t    }\n\t\t\t})\n\t\t}\n\t},\n\tqty: function(frm, cdt, cdn){\n        let item = locals[cdt][cdn];\n        let tbl = frm.doc.items;\n        let i = item.idx;\n\t\tif (item.item_code){\t\n\t\t\tfrappe.call({\n\t\t\t\tmethod: \"erpnext.custom_script.Pfand.get_data_form_sql\",\n\t\t\t\targs:{item_code: item.item_code}\n\t\t\t}).done((r)=> {\n\t\t\t    if (!r.message){\n\t\t\t        refresh_field(\"items\");\n\t\t\t    }\n\t\t\t    else{\n                    if(tbl[i].item_code == r.message[0].item_code)\n                    {\n                        frm.doc.summe_pfand -= tbl[i].amount;\n                        tbl[i].qty = item.qty;\n                        cur_frm.refresh();\n                        // cur_frm.get_field(\"items\").grid.grid_rows[frm.doc.items.length-1].remove();\n                    }\n                    frm.doc.summe_pfand += (tbl[i].qty*tbl[i].rate);\n                    cur_frm.refresh();\n\t\t\t    }\n\t\t\t})\n\t\t}\n        frm.refresh();\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "POS Invoice",
+  "enabled": 1,
+  "modified": "2022-04-14 11:52:09.935491",
+  "module": "Parsa Plm",
+  "name": "POS Invoice-Form",
+  "script": "frappe.ui.form.on('POS Invoice Item', {\n    item_code: function(frm, cdt, cdn){\n\t\tlet item = locals[cdt][cdn];\n\t\tif (item.item_code){\t\n\t\t\tfrappe.call({\n\t\t\t\tmethod: \"erpnext.custom_script.Pfand.get_data_form_sql\",\n\t\t\t\targs:{item_code: item.item_code}\n\t\t\t}).done((r)=> {\n\t\t\t    if (!r.message){\n\t\t\t        refresh_field(\"items\");\n\t\t\t    }\n\t\t\t    else{\n                    let entry =frm.add_child(\"items\");\n    \t\t\t\tentry.item_code = r.message[0].item_code;\n    \t\t\t\tentry.item_name = r.message[0].item_name;\n    \t\t\t\tentry.description = r.message[0].description;\n    \t\t\t\tentry.rate = r.message[0].standard_rate;\n    \t\t\t\tentry.qty = 1;\n    \t\t\t\tentry.uom = r.message[0].stock_uom;\n                    entry.conversion_factor = 1;\n                    entry.rate = r.message[0].standard_rate;\n    \t\t\t\trefresh_field(\"items\");\n                    // entry.income_account = TODO\n                    // entry.cost_center = TODO\n                    frm.doc.summe_pfand += (entry.qty*entry.rate);\n\t\t\t    }\n\t\t\t})\n\t\t}\n\t},\n\tqty: function(frm, cdt, cdn){\n        let item = locals[cdt][cdn];\n        let tbl = frm.doc.items;\n        let i = item.idx;\n        console.log(i)\n\t\tif (item.item_code){\t\n\t\t\tfrappe.call({\n\t\t\t\tmethod: \"erpnext.custom_script.Pfand.get_data_form_sql\",\n\t\t\t\targs:{item_code: item.item_code}\n\t\t\t}).done((r)=> {\n\t\t\t    if (!r.message){\n\t\t\t        refresh_field(\"items\");\n\t\t\t    }\n\t\t\t    else{\n                    if(tbl[i].item_code == r.message[0].item_code)\n                    {\n                        frm.doc.summe_pfand -= tbl[i].amount;\n                        tbl[i].qty = item.qty;\n                        cur_frm.refresh();\n                        // cur_frm.get_field(\"items\").grid.grid_rows[frm.doc.items.length-1].remove();\n                    }\n                    frm.doc.summe_pfand += (tbl[i].qty*tbl[i].rate);\n                    cur_frm.refresh();\n\t\t\t    }\n\t\t\t})\n\t\t}\n        frm.refresh();\n\t}\n})",
+  "view": "Form"
+ }
+]

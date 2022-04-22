@@ -1,0 +1,35 @@
+[
+   {
+   "current_value": 0,
+   "docstatus": 0,
+   "doctype": "Naming Series",
+   "modified": "2022-04-13 16:11:26.659797",
+   "name": "Naming Series",
+   "prefix": null,
+   "select_doc_for_series": "POS Invoice",
+   "set_options": "POS-.MM.-.YYYY.-.####",
+   "user_must_always_select": 0
+   },
+   {
+   "current_value": 0,
+   "docstatus": 0,
+   "doctype": "Naming Series",
+   "modified": "2022-04-13 16:12:26.659797",
+   "name": "Naming Series",
+   "prefix": null,
+   "select_doc_for_series": "Delivery Note",
+   "set_options": "Li-.MM.-.YYYY.-.####",
+   "user_must_always_select": 0
+   },
+   {
+   "current_value": 0,
+   "docstatus": 0,
+   "doctype": "Naming Series",
+   "modified": "2022-04-13 16:13:26.659797",
+   "name": "Naming Series",
+   "prefix": null,
+   "select_doc_for_series": "Sales Invoice",
+   "set_options": "Re-.MM.-.YYYY.-.####",
+   "user_must_always_select": 0
+   }
+]
