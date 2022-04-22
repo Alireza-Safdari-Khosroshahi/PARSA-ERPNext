@@ -3,6 +3,78 @@
   "docstatus": 0,
   "doctype": "UOM",
   "enabled": 1,
+  "modified": "2022-04-22 10:47:10.850491",
+  "must_be_whole_number": 1,
+  "name": "Einheit",
+  "uom_name": "Einheit"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2022-04-22 10:47:10.926756",
+  "must_be_whole_number": 1,
+  "name": "Menge",
+  "uom_name": "Menge"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2022-04-22 10:47:10.955377",
+  "must_be_whole_number": 0,
+  "name": "Verkn\u00fcpfung",
+  "uom_name": "Verkn\u00fcpfung"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2022-04-22 10:47:10.980587",
+  "must_be_whole_number": 0,
+  "name": "Bereich",
+  "uom_name": "Bereich"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2022-04-22 10:47:11.093412",
+  "must_be_whole_number": 0,
+  "name": "Tag",
+  "uom_name": "Tag"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2022-04-22 10:47:11.094798",
+  "must_be_whole_number": 0,
+  "name": "Stunde",
+  "uom_name": "Stunde"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2022-04-22 10:47:11.101784",
+  "must_be_whole_number": 0,
+  "name": "Woche",
+  "uom_name": "Woche"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2022-04-22 10:47:11.267940",
+  "must_be_whole_number": 0,
+  "name": "Prozent",
+  "uom_name": "Prozent"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
   "modified": "2022-03-30 14:21:04.556724",
   "must_be_whole_number": 1,
   "name": "Unit",
