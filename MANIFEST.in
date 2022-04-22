@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include parsa *.css
+recursive-include parsa *.csv
+recursive-include parsa *.html
+recursive-include parsa *.ico
+recursive-include parsa *.js
+recursive-include parsa *.json
+recursive-include parsa *.md
+recursive-include parsa *.png
+recursive-include parsa *.py
+recursive-include parsa *.svg
+recursive-include parsa *.txt
+recursive-exclude parsa *.pyc
